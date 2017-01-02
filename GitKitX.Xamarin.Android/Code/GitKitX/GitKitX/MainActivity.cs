@@ -2,7 +2,7 @@
 using Android.Widget;
 using Android.OS;
 
-using GitKitX.APIKit;
+using GitHostingAPIKit;
 
 namespace GitKitX
 {
@@ -26,8 +26,10 @@ namespace GitKitX
             var password = FindViewById<EditText>(Resource.Id.editTextPassword).Text;
             if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password)) return;
 
+            var apiKit = APIKitBase.GetKitInstance<GithubAPIKit>(userName, password);
+            apiKit.Connect();
             var confirmDialog = new AlertDialog.Builder(this);
-            confirmDialog.SetMessage("Login as " + userName + "?");
+            confirmDialog.SetMessage(apiKit.GetMessage(userName, password));
             confirmDialog.Show();
 
 
