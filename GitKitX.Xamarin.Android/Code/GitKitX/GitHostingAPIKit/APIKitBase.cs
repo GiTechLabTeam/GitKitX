@@ -5,8 +5,6 @@
         public string _userName { get; protected set; }
         public string _password { get; protected set; }
 
-        public abstract void Connect();
-
         public static KitInstance GetKitInstance<KitInstance>(string userName, string password) where KitInstance : APIKitBase, new()
         {
             var instance = new KitInstance();
